@@ -1,16 +1,23 @@
 :root{
-  --bg:#0f1724;
-  --card:#0b1220;
-  --accent:#06b6d4;
+  --bg:#0b1020;
+  --card:#11162a;
+  --accent:#22d3ee;
   --muted:#94a3b8;
-  --white:#e6eef6;
+  --white:#e5edf5;
+  --border:#1f2937;
+}
+
+/* RESET */
+*{
+  box-sizing:border-box;
 }
 
 body{
   margin:0;
-  font-family:system-ui,sans-serif;
-  background:linear-gradient(#071129,#051025);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  background:radial-gradient(circle at top,#0f172a,#020617);
   color:var(--white);
+  line-height:1.6;
 }
 
 .container{
@@ -19,11 +26,14 @@ body{
   padding:24px;
 }
 
-/* NAV */
+/* ================= NAVBAR ================= */
 header{
   position:sticky;
   top:0;
-  background:rgba(0,0,0,0.6);
+  z-index:10;
+  backdrop-filter:blur(10px);
+  background:rgba(2,6,23,.75);
+  border-bottom:1px solid var(--border);
 }
 
 nav{
@@ -34,67 +44,152 @@ nav{
 
 .brand{
   display:flex;
-  gap:12px;
+  gap:14px;
   align-items:center;
 }
 
 .logo{
-  width:40px;
-  height:40px;
-  background:var(--accent);
+  width:42px;
+  height:42px;
+  background:linear-gradient(135deg,var(--accent),#38bdf8);
   color:#000;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:8px;
-  font-weight:bold;
+  border-radius:10px;
+  font-weight:800;
+}
+
+.name{
+  font-weight:700;
+}
+
+.role{
+  font-size:14px;
+  color:var(--muted);
 }
 
 .navlinks a{
   color:var(--muted);
-  margin-left:16px;
+  margin-left:18px;
   text-decoration:none;
+  font-weight:500;
+  transition:.2s;
 }
 
-/* HERO */
+.navlinks a:hover{
+  color:var(--accent);
+}
+
+/* ================= HERO ================= */
 .hero{
-  margin-top:40px;
+  margin-top:60px;
 }
 
+.hero h1{
+  font-size:40px;
+  margin-bottom:10px;
+}
+
+.lead{
+  color:var(--muted);
+  max-width:600px;
+}
+
+.skills{
+  margin-top:16px;
+}
+
+.chip{
+  display:inline-block;
+  padding:6px 14px;
+  margin:6px 6px 0 0;
+  background:rgba(34,211,238,.12);
+  border:1px solid rgba(34,211,238,.3);
+  border-radius:999px;
+  font-size:14px;
+}
+
+/* ================= CARD ================= */
 .card{
-  background:var(--card);
-  padding:24px;
-  border-radius:12px;
+  background:linear-gradient(180deg,#0f172a,#020617);
+  border:1px solid var(--border);
+  padding:28px;
+  border-radius:16px;
 }
 
-/* PROJECTS */
+/* ================= SECTIONS ================= */
+section{
+  margin-top:80px;
+}
+
+section h2{
+  font-size:28px;
+  margin-bottom:24px;
+  position:relative;
+}
+
+section h2::after{
+  content:'';
+  width:60px;
+  height:3px;
+  background:var(--accent);
+  position:absolute;
+  left:0;
+  bottom:-8px;
+  border-radius:6px;
+}
+
+/* ================= PROJECTS ================= */
 .projects{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+  gap:22px;
 }
 
 .project{
-  background:rgba(255,255,255,0.05);
-  padding:20px;
-  border-radius:12px;
+  background:linear-gradient(180deg,#0b1220,#020617);
+  padding:22px;
+  border-radius:16px;
+  border:1px solid var(--border);
   cursor:pointer;
-  transition:.25s;
+  transition:.25s ease;
+}
+
+.project h3{
+  margin-top:0;
+}
+
+.project p{
+  color:var(--muted);
 }
 
 .project:hover{
-  transform:translateY(-6px);
-  border:1px solid var(--accent);
+  transform:translateY(-8px);
+  border-color:var(--accent);
+  box-shadow:0 20px 40px rgba(0,0,0,.45);
 }
 
-/* MODAL */
+/* ================= CONTACT ================= */
+#contact a{
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:600;
+}
+
+#contact a:hover{
+  text-decoration:underline;
+}
+
+/* ================= MODAL ================= */
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.7);
+  background:rgba(2,6,23,.85);
   display:none;
   align-items:center;
   justify-content:center;
+  padding:20px;
 }
 
 .modal.open{
@@ -102,18 +197,39 @@ nav{
 }
 
 .modal-box{
-  background:#071428;
-  padding:24px;
-  border-radius:12px;
-  width:90%;
+  background:linear-gradient(180deg,#0f172a,#020617);
+  border:1px solid var(--border);
+  padding:28px;
+  border-radius:18px;
+  width:100%;
   max-width:600px;
+  animation:pop .25s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.95);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
 
 #closeModal{
   float:right;
   background:none;
   border:none;
-  color:white;
-  font-size:20px;
+  color:var(--muted);
+  font-size:22px;
   cursor:pointer;
+}
+
+#closeModal:hover{
+  color:var(--accent);
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:700px){
+  .hero h1{
+    font-size:32px;
+  }
+  .navlinks{
+    display:none;
+  }
 }
